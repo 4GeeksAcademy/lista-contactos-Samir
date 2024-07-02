@@ -1,45 +1,40 @@
+import { json } from "react-router";
+
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contactList:[]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getContacts: () => {
+				fetch("https://playground.4geeks.com/contact/agendas/samir_mondabla")
+				.then(Response => Response.json())
+				.then(data => setStore({contactList:data.contacts}))
+				.catch(error => console.log("hubo un problema", error))
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+
+			deleteContact: (id) => {
+				return fetch("https://playground.4geeks.com/contact/agendas/samir_mondabla/contacts/"+id, {method:"Delete"})
+				//  .then(Response => Response.json())
+				//  .then(data => setStore({contactList:data.contacts}))
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+			putContact: (id, data) => {
+				return fetch(`https://playground.4geeks.com/contact/agendas/samir_mondabla/contacts/${id}`,  {
+					method: "PUT",
+					headers: {
+					  'Accept': 'application/json',
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				  })
+				  .then(Response => Response.json())
+				}
 			}
-		}
 	};
 };
+
+
 
 export default getState;
