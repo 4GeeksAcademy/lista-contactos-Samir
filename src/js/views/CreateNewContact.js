@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {Context} from "../store/appContext.js";
+import { Link } from "react-router-dom";
 
 const CreateNewContact = () => {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+
+  const {actions} = useContext(Context)
 
   const handleCreateInputChange = (event) => {
     const { id, value } = event.target;
@@ -28,7 +32,9 @@ const CreateNewContact = () => {
 
   const handleConfirm = () => {
     const data = { name, address, phone, email };
-    props.onConfirm(data);
+    actions.postContact(data)
+    console.log(data)
+    // props.onConfirm(data);
     console.log('Crear nuevo contacto:', { name, address, phone, email });
   };
 
@@ -56,8 +62,10 @@ const CreateNewContact = () => {
                   <input type="email" id="email" className="form-control" value={email} onChange={handleCreateInputChange} />
                   <label htmlFor="email" className="form-label">Email</label>
                 </div>
+                <Link to="/">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" className="btn btn-success" onClick={handleConfirm}>Create</button>
+                </Link>
               </form>
             </div>
           </div>

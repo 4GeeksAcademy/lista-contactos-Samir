@@ -14,6 +14,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch(error => console.log("hubo un problema", error))
 			},
 
+			postContact: (data) => {
+				return fetch(`https://playground.4geeks.com/contact/agendas/samir_mondabla/contacts/`,  {
+					method: "POST",
+					headers: {
+					  'Accept': 'application/json',
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				  })
+				  .then(Response => Response.json())
+				},
+
 			deleteContact: (id) => {
 				return fetch("https://playground.4geeks.com/contact/agendas/samir_mondabla/contacts/"+id, {method:"Delete"})
 				//  .then(Response => Response.json())

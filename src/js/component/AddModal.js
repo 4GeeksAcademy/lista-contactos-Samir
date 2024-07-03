@@ -30,12 +30,17 @@ const addModal = (props) => {
     props.onConfirm(data);
   };
 
+  const handleSubmit = () => {
+    const updatedData = { name, address, phone, email };
+    handleConfirm(updatedData);
+  };
+
   return (
     <div className="modal fade" id="addModal" tabIndex="-1">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1>Create a new contact</h1>
+            <h1>Edit contact</h1>
           </div>
           <div className="modal-body">
             <form>
@@ -59,7 +64,7 @@ const addModal = (props) => {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> 
-            <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={handleConfirm}>Create</button>
+            <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={handleSubmit}>Create</button>
           </div>
         </div>
       </div>

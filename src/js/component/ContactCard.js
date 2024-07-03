@@ -9,6 +9,61 @@ export const ContactCard = props => {
 	const [state, setState] = useState({
 		//initialize state here
 	});
+
+	// useEffect(() => {
+    //     initializeUserAndTasks();
+    // }, []);
+
+	// async function initializeUserAndTasks() {
+    //     await getTasks();
+    // }
+
+	// async function createUser() {
+    //     try {
+    //         const response = await fetch(
+    //             "https://playground.4geeks.com/contact/agendas/samir_mondabla",
+    //             {
+    //                 method: "POST",
+    //                 headers: {
+    //                     accept: "application/json",
+    //                     "Content-Type": "application/json",
+    //                 },
+    //                 body: JSON.stringify([]), // Enviar un array vacío para crear el usuario
+    //             }
+    //         );
+    //         if (!response.ok) {
+    //             throw new Error(`Error creating user: ${response.statusText}`);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+	// async function getTasks() {
+    //     try {
+    //         const response = await fetch(`${API_URL}users/Samir_Mondabla`);
+    //         if (!response.ok) {
+    //             if (response.status === 404) {
+    //                 console.log("User not found, creating user...");
+    //                 await createUser();
+    //                 await getTasks();
+    //                 return;
+    //             } else {
+    //                 throw new Error("Failed to fetch tasks");
+    //             }
+    //         }
+    //         const data = await response.json();
+    //         console.log("Fetched tasks:", data);
+    //         if (data.todos) {
+    //             setTodos(data.todos);
+    //         } else {
+    //             setTodos([]);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error fetching tasks:", error);
+    //         setTodos([]);
+    //     }
+    // }
 	
 	return (
 		<li className="list-group-item">
