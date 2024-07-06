@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const addModal = (props) => {
   const [name, setFullName] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    if (props.data) {
+      setFullName(props.data.name);
+      setAddress(props.data.address);
+      setPhone(props.data.phone);
+      setEmail(props.data.email);
+    }
+  }, [props.data]);
 
   const handleInputChange = (event) => {
     switch (event.target.id) {

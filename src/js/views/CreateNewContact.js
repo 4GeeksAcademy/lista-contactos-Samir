@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {Context} from "../store/appContext.js";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,12 @@ const CreateNewContact = () => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
 
-  const {actions} = useContext(Context)
+  const {actions, contacts} = useContext(Context)
+
+  useEffect(() => {
+    // Re-render the component when the contacts state changes
+    console.log('Contacts updated:', contacts);
+  }, [contacts]);
 
   const handleCreateInputChange = (event) => {
     const { id, value } = event.target;
@@ -43,9 +48,11 @@ const CreateNewContact = () => {
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card">
-            <div className="card-body">
+            <div className="card-body bg-color rounded">
+              <div className="h1createNewContactStyle">
               <h1>Create a new contact</h1>
-              <form>
+              </div>
+              <form className="form-bg rounded">
                 <div className="form-group mb-3">
                   <input type="text" id="name" className="form-control" value={name} onChange={handleCreateInputChange} />
                   <label htmlFor="name" className="form-label">Full Name</label>
@@ -58,13 +65,15 @@ const CreateNewContact = () => {
                   <input type="tel" id="phone" className="form-control" value={phone} onChange={handleCreateInputChange} />
                   <label htmlFor="phone" className="form-label">Phone</label>
                 </div>
-                <div className="form-group mb-3">
+                <div className="form-group">
                   <input type="email" id="email" className="form-control" value={email} onChange={handleCreateInputChange} />
                   <label htmlFor="email" className="form-label">Email</label>
                 </div>
                 <Link to="/">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" className="btn btn-success" onClick={handleConfirm}>Create</button>
+                <div className="buttonNewContactStyle  pt-10">
+                <button type="button" className="btn btn-secondary mx-2">Cancel</button>
+                <button type="button" className="btn btn-success float-end " onClick={handleConfirm}>Create</button>
+                </div>
                 </Link>
               </form>
             </div>

@@ -24,6 +24,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data)
 				  })
 				  .then(Response => Response.json())
+				  .then(newContact => {
+					// Update the contactList state with the new contact
+					setStore({ contactList: [...getStore().contactList, newContact] });
+				  });
 				},
 
 			deleteContact: (id) => {

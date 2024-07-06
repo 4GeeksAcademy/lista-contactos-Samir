@@ -15,6 +15,9 @@ export const Home = () => {
 		console.log(store.contactList)
 	}, []) 
 
+	const handleConfirm = (data) => {
+		confirmEdit(data);
+	  };
 
 	const onDelete = (item) => {
 		setSelectedCard(item)
@@ -59,7 +62,7 @@ export const Home = () => {
 			)
 		})}
 			<DeleteModal  data={selectedCard} onConfirm={() => { confirmDelete()}} />
-			<AddModal data={selectedCard} onConfirm={(data) => { confirmEdit(data)}}/>
+			<AddModal data={selectedCard} onConfirm={handleConfirm} />
 	</div>
 	)
 };

@@ -66,10 +66,14 @@ export const ContactCard = props => {
     // }
 	
 	return (
-		<li className="list-group-item">
-			<div className="row w-100">
-				<div className="col-12 col-sm-6 col-md-3 px-0">
-					<img src="https://www.hvcruzcubierta.com/wp-content/uploads/2015/01/loro-1110x624.jpg" alt="Mike Anamendolla" className="rounded-circle mx-auto d-block img-fluid" />
+		<div className="d-flex justify-content-center aling-items-center">
+		<li className="list-group-item container m-1 border-1 rounded">
+			<div className="row">
+				<div className="col-12 col-sm-6 col-md-3 mx-auto">
+					<img src="https://www.hvcruzcubierta.com/wp-content/uploads/2015/01/loro-1110x624.jpg" alt="Mike Anamendolla" 
+					className="rounded-circle mx-auto d-block img-fluid"
+					 style={{
+   					 objectFit: 'cover',borderRadius: '50%',width: '200px',  height: '200px'}}/>
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
@@ -104,6 +108,7 @@ export const ContactCard = props => {
 			</div>
 			
 		</li>
+		</div>
 	);
 };
 /**
