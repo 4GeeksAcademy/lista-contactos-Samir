@@ -10,60 +10,48 @@ export const ContactCard = props => {
 		//initialize state here
 	});
 
-	// useEffect(() => {
-    //     initializeUserAndTasks();
-    // }, []);
-
-	// async function initializeUserAndTasks() {
-    //     await getTasks();
-    // }
-
-	// async function createUser() {
-    //     try {
-    //         const response = await fetch(
-    //             "https://playground.4geeks.com/contact/agendas/samir_mondabla",
-    //             {
-    //                 method: "POST",
-    //                 headers: {
-    //                     accept: "application/json",
-    //                     "Content-Type": "application/json",
-    //                 },
-    //                 body: JSON.stringify([]), // Enviar un array vacío para crear el usuario
-    //             }
-    //         );
-    //         if (!response.ok) {
-    //             throw new Error(`Error creating user: ${response.statusText}`);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-	// async function getTasks() {
-    //     try {
-    //         const response = await fetch(`${API_URL}users/Samir_Mondabla`);
-    //         if (!response.ok) {
-    //             if (response.status === 404) {
-    //                 console.log("User not found, creating user...");
-    //                 await createUser();
-    //                 await getTasks();
-    //                 return;
-    //             } else {
-    //                 throw new Error("Failed to fetch tasks");
-    //             }
-    //         }
-    //         const data = await response.json();
-    //         console.log("Fetched tasks:", data);
-    //         if (data.todos) {
-    //             setTodos(data.todos);
-    //         } else {
-    //             setTodos([]);
-    //         }
-    //     } catch (error) {
-    //         console.error("Error fetching tasks:", error);
-    //         setTodos([]);
-    //     }
-    // }
+	useEffect(() => {
+		initializeContactList();
+	  }, []);
+	
+	  async function initializeContactList() {
+		try {
+		  const fetchedContacts = await getContacts();
+		  if (fetchedContacts.length === 0) {
+			// Si no hay contactos encontrados, crear una nueva lista de contactos
+			await createContactList();
+			// Volver a intentar obtener los contactos después de crear la lista
+			const updatedContacts = await getContacts();
+			setContacts(updatedContacts);
+		  } else {
+			setContacts(fetchedContacts);
+		  }
+		} catch (error) {
+		  console.error("Error initializing contact list:", error);
+		  setContacts([]);
+		}
+	  }
+	
+	  async function createContactList() {
+		try {
+		  const response = await fetch(`https://playground.4geeks.com/contact/agendas/Samir_Mondabla`, {
+			method: "POST",
+			headers: {
+			  accept: "application/json",
+			  "Content-Type": "application/json",
+			},
+			body: JSON.stringify([]), // Enviar un array vacío para crear la lista inicial
+		  });
+		  if (!response.ok) {
+			throw new Error(`Error creating contact list: ${response.statusText}`);
+		  }
+		  // Opcional: Puedes retornar algún indicador o mensaje de éxito si es necesario
+		} catch (error) {
+		  console.error("Error creating contact list:", error);
+		  throw error; // Manejo de errores según tus necesidades
+		}
+	  }
+	
 	
 	return (
 		<div className="d-flex justify-content-center aling-items-center">
