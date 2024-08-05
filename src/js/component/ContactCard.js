@@ -3,55 +3,11 @@ import PropTypes from "prop-types"
 import { Context } from "../store/appContext.js";
 
 
-
 export const ContactCard = props => {
 	const { store, actions } = useContext(Context)
 	const [state, setState] = useState({
 		//initialize state here
 	});
-
-	useEffect(() => {
-		initializeContactList();
-	  }, []);
-	
-	  async function initializeContactList() {
-		try {
-		  const fetchedContacts = await getContacts();
-		  if (fetchedContacts.length === 0) {
-			// Si no hay contactos encontrados, crear una nueva lista de contactos
-			await createContactList();
-			// Volver a intentar obtener los contactos después de crear la lista
-			const updatedContacts = await getContacts();
-			setContacts(updatedContacts);
-		  } else {
-			setContacts(fetchedContacts);
-		  }
-		} catch (error) {
-		  console.error("Error initializing contact list:", error);
-		  setContacts([]);
-		}
-	  }
-	
-	  async function createContactList() {
-		try {
-		  const response = await fetch(`https://playground.4geeks.com/contact/agendas/Samir_Mondabla`, {
-			method: "POST",
-			headers: {
-			  accept: "application/json",
-			  "Content-Type": "application/json",
-			},
-			body: JSON.stringify([]), // Enviar un array vacío para crear la lista inicial
-		  });
-		  if (!response.ok) {
-			throw new Error(`Error creating contact list: ${response.statusText}`);
-		  }
-		  // Opcional: Puedes retornar algún indicador o mensaje de éxito si es necesario
-		} catch (error) {
-		  console.error("Error creating contact list:", error);
-		  throw error; // Manejo de errores según tus necesidades
-		}
-	  }
-	
 	
 	return (
 		<div className="d-flex justify-content-center aling-items-center">

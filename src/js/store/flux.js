@@ -4,9 +4,30 @@ import { json } from "react-router";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contactList:[]
+			contactList: [],
+      		apiUrl: "https://playground.4geeks.com/contact/agendas",
+      		user: "samir_mondabla",
 		},
 		actions: {
+
+			
+			createContactList: async () => {
+        const store = getStore();
+        try {
+          const response = await fetch(`${store.apiUrl}/${store.user}`, {
+            method: "POST",
+          });
+          const data = await response.json();
+          if (response.ok) {
+            return true;
+          }
+          return false;
+        } catch (error) {
+          console.error("Error", error);
+          return false;
+        }
+      },
+
 			getContacts: () => {
 				fetch("https://playground.4geeks.com/contact/agendas/samir_mondabla")
 				.then(Response => Response.json())
